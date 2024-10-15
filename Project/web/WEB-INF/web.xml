@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <context-param>
+        <description>admin user</description>
+        <param-name>username</param-name>
+        <param-value>sonnt</param-value>
+    </context-param>
+    <context-param>
+        <description>admin password</description>
+        <param-name>password</param-name>
+        <param-value>123</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>dantri.com</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>StudentCreateController</servlet-name>
+        <servlet-class>controller.StudentCreateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentCreateController</servlet-name>
+        <url-pattern>/student/create</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>StudentLoadController</servlet-name>
+        <servlet-class>controller.StudentLoadController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentLoadController</servlet-name>
+        <url-pattern>/student/load</url-pattern>
+    </servlet-mapping>
+</web-app>
