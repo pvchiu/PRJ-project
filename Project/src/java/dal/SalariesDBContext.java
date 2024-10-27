@@ -4,11 +4,13 @@
  */
 package dal;
 
-import entity.Product;
-import java.util.ArrayList;
-import java.sql.ResultSet;
+import entity.Department;
+import entity.Employee;
+import entity.Salaries;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,47 +18,43 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class ProductDBContext extends DBContext<Product> {
+public class SalariesDBContext extends DBContext<Salaries>{
 
     @Override
-    public void insert(Product model) {
+    public void insert(Salaries model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Product model) {
+    public void update(Salaries model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Product model) {
+    public void delete(Salaries model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Product> list() {
-        String sql = "SELECT [pid]\n"
-                + "      ,[pname]\n"
-                + "      ,[description]\n"
-                + "  FROM [Products]";
-        ArrayList<Product> products = new ArrayList<>();
+    public ArrayList<Salaries> list() {
+        String sql = "SELECT * from  Salaries";
+        ArrayList<Salaries> salaries = new ArrayList<>();
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while(rs.next())
-            {
-                Product p = new Product();
-                p.setId(rs.getInt("pid"));
-                p.setName(rs.getString("pname"));
-                p.setDescription(rs.getString("description"));
-                products.add(p);
+            while (rs.next()) {
+                Salaries s = new Salaries();
+                s.setId(rs.getInt("sid"));
+                s.setSlevel(rs.getNString("slevel"));
+                s.setSalary(rs.getDouble("salary"));
+                
+                salaries.add(s);
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally
-        {
+        } finally {
             try {
                 stm.close();
                 connection.close();
@@ -64,12 +62,13 @@ public class ProductDBContext extends DBContext<Product> {
                 Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return products;
+        return salaries;
     }
 
     @Override
-    public Product get(int id) {
+    public Salaries get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 
 }
