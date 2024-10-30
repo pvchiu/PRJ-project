@@ -14,6 +14,36 @@
     </head>
     <body>
         <jsp:include page="../master/shortprofile.jsp"></jsp:include>
+        
+        <form action="list" method="GET"> 
+            Id: <input type="text" name="id" value="${param.id}"/> <br/>
+            Name: <input type="text" name="name" value="${param.name}"/> <br/>
+            Gender: 
+            <input type="radio" ${param.gender eq "male" ? "checked='checked'" : ""} 
+                   name="gender" value="male"/> Male
+            <input type="radio" ${param.gender eq "female" ? "checked='checked'" : ""}
+                   name="gender" value="female"/> Female
+            <input type="radio" ${param.gender eq null or param.gender eq "both" ? "checked='checked'" : ""} 
+                   name="gender" value="both"/> Both
+            <br/>
+            Dob - From: <input type="date" name="dobFrom" value="${param.dobFrom}"/> 
+            - To: <input type="date" name="dobTo" value="${param.dobTo}"/> <br/>
+            Phone Number: <input type="text" name="phonenumber" value="${param.phonenumber}"/> <br/>
+            Address: <input type="text" name="address" value="${param.address}"/> <br/>
+            Department: 
+            <select name="did">
+                <option value="-1">--------------ALL--------------</option>
+                <c:forEach items="${requestScope.depts}" var="d">
+                    <option 
+                        ${param.did ne null and param.did eq d.id ? "selected='selected'" : ""}
+                        value="${d.id}">${d.name}</option>
+                </c:forEach>
+            </select> 
+            <br/>
+            <input type="submit" value="Search"/>
+        </form>
+
+        
         <table border="1px">
             <tr>
                 <td>Employee ID</td>
@@ -22,6 +52,9 @@
                 <td>Department</td>
                 <td>Salary</td>
                 <td>Phone number</td>
+                <td>Gender</td>
+                <td>Dob</td>
+                
                 
                 
             </tr>
@@ -33,7 +66,8 @@
                 <td>${e.did.name}</td>
                 <td>${e.sid.salary}</td>
                 <td>${e.phonenumber}</td>
-                
+                <td>${e.gender}</td>
+                <td>${e.dob}</td>
                 
             </tr>
         </c:forEach>

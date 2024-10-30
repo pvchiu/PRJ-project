@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.Date;
+
 /**
  *
  * @author admin
@@ -11,6 +13,8 @@ package entity;
 public class Employee {
     private int id;
     private String name;
+    private boolean gender;
+    private Date dob;
     private Department did;
     private String phonenumber;
     private String address;
@@ -62,6 +66,22 @@ public class Employee {
 
     public void setSid(Salaries sid) {
         this.sid = sid;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
     
 }
