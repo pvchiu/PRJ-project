@@ -22,6 +22,18 @@
         <servlet-name>productionplan</servlet-name>
         <servlet-class>controller.productionPlan.ProductionPlanCreateController</servlet-class>
     </servlet>
+    <!--    <servlet>
+        <servlet-name>EmployeeListController</servlet-name>
+        <servlet-class>controller.employee.EmployeeListController</servlet-class>
+    </servlet>-->
+    <servlet>
+        <servlet-name>EmployeeCreateController</servlet-name>
+        <servlet-class>controller.employee.EmployeeCreateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeCreate</servlet-name>
+        <servlet-class>controller.employee.EmployeeCreate</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>EmployeeListController</servlet-name>
         <servlet-class>controller.employee.EmployeeListController</servlet-class>
@@ -49,6 +61,18 @@
     <servlet-mapping>
         <servlet-name>productionplan</servlet-name>
         <url-pattern>/productionplan/create</url-pattern>
+    </servlet-mapping>
+    <!--    <servlet-mapping>
+        <servlet-name>EmployeeListController</servlet-name>
+        <url-pattern>/employee/list</url-pattern>
+    </servlet-mapping>-->
+    <!--    <servlet-mapping>
+        <servlet-name>EmployeeCreateController</servlet-name>
+        <url-pattern>/employee/create</url-pattern>
+    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>EmployeeCreate</servlet-name>
+        <url-pattern>/employee/create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EmployeeListController</servlet-name>

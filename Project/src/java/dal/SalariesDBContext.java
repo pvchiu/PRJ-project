@@ -19,6 +19,39 @@ import java.util.logging.Logger;
  * @author admin
  */
 public class SalariesDBContext extends DBContext<Salaries>{
+    
+    public ArrayList<Salaries> get(String salarys) {
+        
+        ArrayList<Salaries> salary = new ArrayList<>();
+        PreparedStatement stm = null;
+        try {
+            String sql = "SELECT [sid]\n"
+                + "      ,[slevel]\n"
+                + "      ,[salary]\n"
+                + "  FROM [Salaries]\n"
+                + "WHERE [type] = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, salarys);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Salaries s = new Salaries();
+                s.setId(rs.getByte("sid"));
+                s.setSlevel(rs.getNString("slevel"));
+                s.setSalary(rs.getDouble("salary"));
+                salary.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stm.close();
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DepartmentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return salary;
+    }
 
     @Override
     public void insert(Salaries model) {

@@ -66,7 +66,7 @@
                 <td>${e.did.name}</td>
                 <td>${e.sid.salary}</td>
                 <td>${e.phonenumber}</td>
-                <td>${e.gender}</td>
+                <td>${e.gender?"male":"female"}</td>
                 <td>${e.dob}</td>
                 
             </tr>

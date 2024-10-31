@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class DepartmentDBContext extends DBContext<Department> {
 
-    public ArrayList<Department> get(String type) {
+    public ArrayList<Department> get(String dname) {
         
         ArrayList<Department> depts = new ArrayList<>();
         PreparedStatement stm = null;
@@ -28,9 +28,9 @@ public class DepartmentDBContext extends DBContext<Department> {
                 + "      ,[dname]\n"
                 + "      ,[type]\n"
                 + "  FROM [Departments]\n"
-                + "WHERE [type] = ?";
+                + "WHERE [dname] = ?";
             stm = connection.prepareStatement(sql);
-            stm.setString(1, type);
+            stm.setString(1, dname);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Department d = new Department();

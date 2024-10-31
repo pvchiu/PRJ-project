@@ -7,12 +7,12 @@ package dal;
 import entity.Department;
 import entity.Employee;
 import entity.Salaries;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -119,12 +119,99 @@ public class EmployeeDBContext extends DBContext<Employee> {
 
     @Override
     public void insert(Employee model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        
+        try {
+            String sql_insert = ""
+                + "INSERT INTO [Employees]\n"
+                + "           ([ename]\n"
+                + "           ,[gender]\n"
+                + "           ,[dob]\n"
+                + "           ,[address]\n"
+                + "           ,[phonenumber]\n"
+                + "           ,[did]\n"
+                + "           ,[sid]\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?)\n";
+        String sql_getEid = "SELECT @@IDENTITY as eid";
+        PreparedStatement stm_insert;
+        PreparedStatement stm_getEid;
+            connection.setAutoCommit(false);
+            stm_insert = connection.prepareStatement(sql_insert);
+            stm_insert.setNString(1, model.getName());
+            stm_insert.setBoolean(2, model.isGender());
+            stm_insert.setDate(3, (Date) model.getDob());
+            stm_insert.setNString(4, model.getAddress());
+            stm_insert.setNString(5, model.getPhonenumber());
+            stm_insert.setInt(6, model.getDid().getId());
+            stm_insert.setInt(7, model.getSid().getId());
+            stm_insert.executeUpdate();
+            stm_getEid = connection.prepareStatement(sql_getEid);
+            ResultSet rs = stm_getEid.executeQuery();
+            if (rs.next()) {
+                model.setId(rs.getInt("eid"));
+            }
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(EmployeeDBContext.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    public static void main(String[] args) {
+        EmployeeDBContext e = new EmployeeDBContext();
+        System.out.println(e.list().size());
+    }
     @Override
     public void update(Employee model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql_update = "UPDATE [Employees] SET ename = ?, gender = ?, dob = ?, address = ?, phonenumber = ?, did = ?, sid = ? WHERE eid = ?";
+        PreparedStatement stm_update = null;
+        
+        try {
+            connection.setAutoCommit(false);
+            stm_update = connection.prepareStatement(sql_update);
+            stm_update.setString(1, model.getName());
+            stm_update.setBoolean(2, model.isGender());
+            stm_update.setDate(3, (Date) model.getDob());
+            stm_update.setString(4, model.getAddress());
+            stm_update.setString(5, model.getPhonenumber());
+            stm_update.setInt(6, model.getDid().getId());
+            stm_update.setInt(7, model.getSid().getId());
+            stm_update.setInt(8, model.getId());
+            
+            stm_update.executeUpdate();
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeeDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override

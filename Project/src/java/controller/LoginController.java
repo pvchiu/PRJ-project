@@ -27,12 +27,13 @@ public class LoginController extends HttpServlet{
         String password = req.getServletContext().getInitParameter("password");
         if(param_user.equals(username) && param_pass.equals(password))
         {
-            resp.getWriter().println("login successful!");
+            
             User account = new User();
             account.setUsername(username);
             account.setPassword(password);
             account.setDisplayname("mr A");
             req.getSession().setAttribute("account", account);
+//            resp.sendRedirect("home");
         }
         else
         {
