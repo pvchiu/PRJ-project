@@ -4,48 +4,39 @@
  */
 package entity;
 
-import java.util.Date;
+import java.sql.*;
 
 /**
  *
  * @author admin
  */
-public class PlanDetails {
-    private int pdid;
-    private ProductionPlanHeader phid;
-    private Salaries sid;
-    private Date date;
+public class ProductionPlanDetail {
+    private ProductionPlanHeader header;
+    private int sid;
+    private java.sql.Date date;
     private int quantity;
 
-    public int getPdid() {
-        return pdid;
+    public ProductionPlanHeader getHeader() {
+        return header;
     }
 
-    public void setPdid(int pdid) {
-        this.pdid = pdid;
+    public void setHeader(ProductionPlanHeader header) {
+        this.header = header;
     }
 
-    public ProductionPlanHeader getPhid() {
-        return phid;
-    }
-
-    public void setPhid(ProductionPlanHeader phid) {
-        this.phid = phid;
-    }
-
-    public Salaries getSid() {
+    public int getSid() {
         return sid;
     }
 
-    public void setSid(Salaries sid) {
+    public void setSid(int sid) {
         this.sid = sid;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 
@@ -56,6 +47,8 @@ public class PlanDetails {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    
     
     
     

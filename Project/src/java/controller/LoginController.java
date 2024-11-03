@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet{
             account.setPassword(password);
             account.setDisplayname("mr A");
             req.getSession().setAttribute("account", account);
-//            resp.sendRedirect("home");
+            resp.sendRedirect("view/home/home.jsp");
         }
         else
         {

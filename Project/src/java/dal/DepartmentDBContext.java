@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class DepartmentDBContext extends DBContext<Department> {
 
-    public ArrayList<Department> get(String dname) {
+    public ArrayList<Department> get(String type) {
         
         ArrayList<Department> depts = new ArrayList<>();
         PreparedStatement stm = null;
@@ -28,9 +28,9 @@ public class DepartmentDBContext extends DBContext<Department> {
                 + "      ,[dname]\n"
                 + "      ,[type]\n"
                 + "  FROM [Departments]\n"
-                + "WHERE [dname] = ?";
+                + "WHERE [type] = ?";
             stm = connection.prepareStatement(sql);
-            stm.setString(1, dname);
+            stm.setString(1, type);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Department d = new Department();
@@ -69,10 +69,11 @@ public class DepartmentDBContext extends DBContext<Department> {
 
     @Override
     public ArrayList<Department> list() {
-        String sql = "SELECT * from  Departments";
+        
         ArrayList<Department> department = new ArrayList<>();
         PreparedStatement stm = null;
         try {
+            String sql = "SELECT did,dname,type FROM Departments";
             stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -85,13 +86,13 @@ public class DepartmentDBContext extends DBContext<Department> {
                 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 stm.close();
                 connection.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DepartmentDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return department;

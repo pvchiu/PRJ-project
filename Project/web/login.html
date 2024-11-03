@@ -8,12 +8,98 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #8a2be2, #d8bfd8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 50%, #4b0082 50%);
+            z-index: 1;
+        }
+        .login-content {
+            padding: 40px 30px;
+            position: relative;
+            z-index: 2;
+        }
+        .login-content h2 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        .input-field {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .input-field input {
+            width: 100%;
+            padding: 10px;
+            padding-left: 40px;
+            border: none;
+            border-bottom: 2px solid #ddd;
+            outline: none;
+            font-size: 14px;
+        }
+        .input-field i {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: #4b0082;
+        }
+        input[type="submit"] {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 20px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #3a0068;
+        }
+    </style>
+</head>
     </head>
     <body>
-        <form action="login" method="POST"> 
-            username: <input type="text" name="username"/> <br/>
-            password: <input type="password" name="password"/> <br/>
-            <input type="submit" value="Login"/>
-        </form>
-    </body>
+    <div class="login-container">
+        <div class="login-content">
+            <h2>Log In Now</h2>
+            <form action="login" method="POST">
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="username" placeholder="User name / Email" required>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <input type="submit" value="Log In">
+            </form>
+        </div>
+    </div>
+</body>
 </html>

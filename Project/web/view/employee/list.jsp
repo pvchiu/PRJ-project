@@ -11,6 +11,71 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px; /* Space between form elements */
+            margin-bottom: 10px; /* Reduced space below the form */
+            font-size: 14px; /* Smaller font size for compactness */
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            padding: 4px; /* Reduced padding */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 120px; /* Smaller fixed width for input elements */
+        }
+
+        input[type="radio"] {
+            margin-left: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 4px 8px; /* Smaller button padding */
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px; /* Smaller font size for button */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6a0dad;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px; /* Space above the table */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 6px; /* Reduced padding */
+            text-align: left;
+            font-size: 14px; /* Smaller font size for table */
+        }
+
+        th {
+            background-color: #4b0082;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra striping for rows */
+        }
+    </style>
+        
     </head>
     <body>
         <jsp:include page="../master/shortprofile.jsp"></jsp:include>
@@ -43,7 +108,7 @@
             <input type="submit" value="Search"/>
         </form>
 
-        
+        <a href="/Project/employee/create" class="create-button">Create Employee</a>
         <table border="1px">
             <tr>
                 <td>Employee ID</td>

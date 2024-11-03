@@ -4,11 +4,7 @@
  */
 package dal;
 
-import entity.Department;
-import entity.Employee;
-import entity.PlanDetails;
-import entity.ProductionPlanHeader;
-import entity.Salaries;
+import entity.Shift;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,64 +16,62 @@ import java.util.logging.Logger;
  *
  * @author admin
  */
-public class PlanDetailsDBContext extends DBContext<PlanDetails> {
+public class ShiftDBContext extends DBContext<Shift>{
 
     @Override
-    public void insert(PlanDetails model) {
+    public void insert(Shift model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(PlanDetails model) {
+    public void update(Shift model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(PlanDetails model) {
+    public void delete(Shift model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<PlanDetails> list() {
-        ArrayList<PlanDetails> pds = new ArrayList<>();
+    public ArrayList<Shift> list() {
+        ArrayList<Shift> shift= new ArrayList<>();
         PreparedStatement stm = null;
+            String sql = "SELECT [sid]\n"
+                    + "      ,[sname]\n"
+                    + "      ,[starttime]\n"
+                    + "      ,[endtime]\n"
+                    + "  FROM [Shifts]";
         try {
-            String sql = "select * from PlanDetails";
-            stm = connection.prepareStatement(sql);
+            
+           
+            stm= connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                PlanDetails pl = new PlanDetails();
-                pl.setPdid(rs.getByte("pdid"));
-                pl.setDate(rs.getDate("date"));
-                pl.setQuantity(rs.getByte("quantity"));
-
-                ProductionPlanHeader ph = new ProductionPlanHeader();
-                
-                ph.setId(rs.getByte("phid"));
-                pl.setPhid(ph);
-
-                Salaries s = new Salaries();
-                s.setId(rs.getByte("sid"));
-                pl.setSid(s);
-
-                pds.add(pl);
+            while(rs.next()){
+                Shift s = new Shift();
+                s.setId(rs.getInt("sid"));
+                s.setName(rs.getString("sname"));
+                s.setStart(rs.getTime("starttime"));
+                s.setEnd(rs.getTime("endtime"));
+                shift.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+            Logger.getLogger(ShiftDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
             try {
                 stm.close();
                 connection.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ShiftDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return pds;
+        return shift;
     }
 
     @Override
-    public PlanDetails get(int id) {
+    public Shift get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

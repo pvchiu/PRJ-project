@@ -16,14 +16,34 @@ public class ProductionPlan {
     private Date start;
     private Date end;
     private Department dept;
+    private Product pid;
+    private ProductionPlanHeader phid;
     private ArrayList<ProductionPlanHeader> headers = new ArrayList<>();
 
-    public ArrayList<ProductionPlanHeader> getHeaders() {
+    public Product getPid() {
+        return pid;
+    }
+
+    public void setPid(Product pid) {
+        this.pid = pid;
+    }
+
+    public ProductionPlanHeader getPhid() {
+        return phid;
+    }
+
+    public void setPhid(ProductionPlanHeader phid) {
+        this.phid = phid;
+    }
+
+    
+
+    public ArrayList<ProductionPlanHeader> getHeader() {
         return headers;
     }
 
-    public void setHeaders(ArrayList<ProductionPlanHeader> headers) {
-        this.headers = headers;
+    public void setHeader(ArrayList<ProductionPlanHeader> header) {
+        this.headers = header;
     }
     
 

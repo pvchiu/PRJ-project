@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author admin
@@ -14,7 +16,16 @@ public class ProductionPlanHeader {
     private Product product;
     private int quantity;
     private float estimatedeffort;
+    
+private ArrayList<ProductionPlanHeader> headers;
 
+public ArrayList<ProductionPlanHeader> getHeaders() {
+    return headers;
+}
+
+public void setHeaders(ArrayList<ProductionPlanHeader> headers) {
+    this.headers = headers;
+}
     public int getId() {
         return id;
     }

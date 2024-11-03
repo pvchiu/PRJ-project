@@ -3,7 +3,7 @@
     <context-param>
         <description>admin user</description>
         <param-name>username</param-name>
-        <param-value>sonnt</param-value>
+        <param-value>chieu</param-value>
     </context-param>
     <context-param>
         <description>admin password</description>
@@ -13,10 +13,7 @@
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
-        <init-param>
-            <param-name>url</param-name>
-            <param-value>dantri.com</param-value>
-        </init-param>
+        
     </servlet>
     <servlet>
         <servlet-name>productionplan</servlet-name>
@@ -37,6 +34,18 @@
     <servlet>
         <servlet-name>EmployeeListController</servlet-name>
         <servlet-class>controller.employee.EmployeeListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductionPlanList</servlet-name>
+        <servlet-class>controller.productionPlan.ProductionPlanList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcductionPlanUpdate</servlet-name>
+        <servlet-class>controller.productionPlan.ProcductionPlanUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductionPlanDetails</servlet-name>
+        <servlet-class>controller.productionPlan.ProductionPlanDetails</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -62,14 +71,6 @@
         <servlet-name>productionplan</servlet-name>
         <url-pattern>/productionplan/create</url-pattern>
     </servlet-mapping>
-    <!--    <servlet-mapping>
-        <servlet-name>EmployeeListController</servlet-name>
-        <url-pattern>/employee/list</url-pattern>
-    </servlet-mapping>-->
-    <!--    <servlet-mapping>
-        <servlet-name>EmployeeCreateController</servlet-name>
-        <url-pattern>/employee/create</url-pattern>
-    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>EmployeeCreate</servlet-name>
         <url-pattern>/employee/create</url-pattern>
@@ -77,5 +78,17 @@
     <servlet-mapping>
         <servlet-name>EmployeeListController</servlet-name>
         <url-pattern>/employee/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductionPlanList</servlet-name>
+        <url-pattern>/productionplan/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcductionPlanUpdate</servlet-name>
+        <url-pattern>/productionplan/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductionPlanDetails</servlet-name>
+        <url-pattern>/productionplan/detail</url-pattern>
     </servlet-mapping>
 </web-app>

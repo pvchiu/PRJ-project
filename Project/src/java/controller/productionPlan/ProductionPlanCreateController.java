@@ -54,36 +54,72 @@ public class ProductionPlanCreateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ProductionPlan plan = new ProductionPlan();
-        plan.setName(request.getParameter("name"));
-        plan.setStart(Date.valueOf(request.getParameter("from")));
-        plan.setEnd(Date.valueOf(request.getParameter("to")));
-        
-        Department d = new Department();
-        d.setId(Integer.parseInt(request.getParameter("did")));
-        
-        plan.setDept(d);
-        
-        String[] pids = request.getParameterValues("pid");
-        for (String pid : pids) {
+plan.setName(request.getParameter("name"));
+
+// Vérifiez la date de début
+String startDate = request.getParameter("from");
+if (startDate != null && !startDate.isEmpty()) {
+    plan.setStart(Date.valueOf(startDate));
+} else {
+    response.getWriter().println("Start date is required!");
+    return;
+}
+
+// Vérifiez la date de fin
+String endDate = request.getParameter("to");
+if (endDate != null && !endDate.isEmpty()) {
+    plan.setEnd(Date.valueOf(endDate));
+} else {
+    response.getWriter().println("End date is required!");
+    return;
+}
+
+// Vérifiez l'identifiant du département
+String did = request.getParameter("did");
+if (did != null && !did.isEmpty()) {
+    Department d = new Department();
+    d.setId(Integer.parseInt(did));
+    plan.setDept(d);
+} else {
+    response.getWriter().println("Department ID is required!");
+    return;
+}
+
+// Vérifiez la présence des produits
+String[] pids = request.getParameterValues("pid");
+if (pids != null) {
+    for (String pid : pids) {
+        if (pid != null && !pid.isEmpty()) {
             Product p = new Product();
             p.setId(Integer.parseInt(pid));
-            
+
             ProductionPlanHeader header = new ProductionPlanHeader();
             header.setProduct(p);
-            String raw_quantity = request.getParameter("quantity"+pid);
-            String raw_effort = request.getParameter("effort"+pid);
-            header.setQuantity(raw_quantity!=null && raw_quantity.length()>0?Integer.parseInt(raw_quantity):0);
-            header.setEstimatedeffort(raw_effort!=null && raw_effort.length()>0?Float.parseFloat(raw_effort):0);
-            
-            if(header.getQuantity()>0&& header.getEstimatedeffort()>0)
-                plan.getHeaders().add(header);
+
+            String raw_quantity = request.getParameter("quantity" + pid);
+            String raw_effort = request.getParameter("effort" + pid);
+
+            // Validation pour quantité et effort
+            header.setQuantity((raw_quantity != null && !raw_quantity.isEmpty()) ? Integer.parseInt(raw_quantity) : 0);
+            header.setEstimatedeffort((raw_effort != null && !raw_effort.isEmpty()) ? Float.parseFloat(raw_effort) : 0);
+
+            // Ajout du header seulement si la quantité et l'effort sont valides
+            if (header.getQuantity() > 0 && header.getEstimatedeffort() > 0) {
+                plan.getHeader().add(header);
+            }
         }
+    }
+} else {
+    response.getWriter().println("No products selected!");
+    return;
+}
         
-        if(plan.getHeaders().size() >0)
+        if(plan.getHeader().size() >0)
         {
             ProductionPlanDBContext db = new ProductionPlanDBContext();
             db.insert(plan);
             response.getWriter().println("your plan has been added!");
+            response.sendRedirect("../productionplan/list");
         }
         else
         {
@@ -91,7 +127,6 @@ public class ProductionPlanCreateController extends HttpServlet {
         }
         
     }
-
    
 
 }
